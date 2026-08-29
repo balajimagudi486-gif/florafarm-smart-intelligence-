@@ -1,6 +1,6 @@
 // FloraFarm — Crop AI Page (Disease + Combined Flow)
 import React, { useState, useCallback } from 'react';
-import { Scan, Leaf, ArrowRight, RefreshCcw, Zap } from 'lucide-react';
+import { Scan, Leaf, RefreshCcw, Zap } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { predictDisease } from '../services/diseaseApi';
 import { recommendFertilizer } from '../services/fertilizerApi';
@@ -158,9 +158,9 @@ const CropAI: React.FC = () => {
         severity: dResult.severity,
         is_demo: dResult.is_demo,
         imageUrl: imagePreview,
-        fertilizer: fResult.fertilizer,
-        fertilizerType: fResult.type,
-        fertilizerConfidence: fResult.confidence,
+        fertilizer: fResult?.fertilizer,
+        fertilizerType: fResult?.type,
+        fertilizerConfidence: fResult?.confidence,
       };
       const history = JSON.parse(localStorage.getItem('florafarm_history') || '[]');
       localStorage.setItem('florafarm_history', JSON.stringify([record, ...history].slice(0, 100)));
