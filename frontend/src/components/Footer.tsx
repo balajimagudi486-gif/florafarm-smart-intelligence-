@@ -95,7 +95,10 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">{t.footer.copyright}</p>
+          <div className="flex flex-col gap-1">
+            <p className="text-xs text-white/40">{t.footer.copyright}</p>
+            <p className="text-xs font-medium text-flora-green">Developed by Balaji</p>
+          </div>
           <div className="flex items-center gap-4">
             <span className="text-xs text-white/30">FastAPI · TensorFlow · React</span>
           </div>
