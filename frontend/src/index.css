@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== FLORA Design System ===== */
+:root {
+  --flora-green: #39FF88;
+  --flora-emerald: #10B981;
+  --flora-deep: #047857;
+  --flora-forest: #064E3B;
+  --flora-dark: #022C22;
+  --flora-text: #12372A;
+  --flora-bg: #F8FFFB;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #F8FFFB;
+    color: #12372A;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F0FDF4;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #10B981;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #047857;
+  }
+}
+
+@layer components {
+  /* Card styles */
+  .flora-card {
+    @apply bg-white rounded-2xl border border-emerald-100 shadow-card;
+  }
+
+  .flora-card-hover {
+    @apply flora-card transition-all duration-300 hover:shadow-flora hover:-translate-y-1 hover:border-emerald-200;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-flora-green text-flora-dark font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 hover:scale-105 hover:shadow-flora-green
+           active:scale-95 focus:outline-none focus:ring-2 focus:ring-flora-green/50;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-flora-forest border-2 border-flora-emerald font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 hover:bg-flora-light
+           active:scale-95 focus:outline-none focus:ring-2 focus:ring-flora-emerald/30;
+  }
+
+  .btn-ghost {
+    @apply text-flora-forest font-medium px-4 py-2 rounded-lg
+           transition-all duration-200 hover:bg-flora-light
+           focus:outline-none focus:ring-2 focus:ring-flora-emerald/30;
+  }
+
+  /* Badge styles */
+  .badge-healthy {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-emerald-100 text-emerald-700 border border-emerald-200;
+  }
+
+  .badge-low {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-yellow-50 text-yellow-700 border border-yellow-200;
+  }
+
+  .badge-moderate {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-orange-50 text-orange-700 border border-orange-200;
+  }
+
+  .badge-high {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-red-50 text-red-700 border border-red-200;
+  }
+
+  .badge-demo {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold
+           bg-amber-50 text-amber-700 border border-amber-200;
+  }
+
+  .badge-organic {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-emerald-100 text-emerald-700 border border-emerald-200;
+  }
+
+  .badge-inorganic {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+           bg-blue-50 text-blue-700 border border-blue-200;
+  }
+
+  /* Form inputs */
+  .flora-input {
+    @apply w-full px-4 py-2.5 rounded-xl border border-emerald-200 bg-white
+           text-flora-text placeholder-emerald-300
+           focus:outline-none focus:ring-2 focus:ring-flora-green/40 focus:border-flora-green
+           transition-all duration-200;
+  }
+
+  .flora-select {
+    @apply flora-input appearance-none cursor-pointer;
+  }
+
+  .flora-label {
+    @apply block text-sm font-semibold text-flora-forest mb-1.5;
+  }
+
+  /* Section headings */
+  .section-tag {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold
+           bg-flora-green/15 text-flora-forest border border-flora-green/30;
+  }
+
+  /* Progress bar */
+  .confidence-bar {
+    @apply h-2 rounded-full bg-emerald-100 overflow-hidden;
+  }
+
+  .confidence-fill {
+    @apply h-full rounded-full bg-gradient-to-r from-flora-emerald to-flora-green
+           transition-all duration-1000 ease-out;
+  }
+
+  /* AI scanning animation overlay */
+  .scan-overlay {
+    @apply absolute inset-0 pointer-events-none overflow-hidden rounded-xl;
+  }
+
+  /* Glass card */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/60 rounded-2xl shadow-card;
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply flora-card p-6 flex flex-col gap-2;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply text-flora-text/70 font-medium text-sm px-3 py-2 rounded-lg
+           transition-all duration-200 hover:text-flora-forest hover:bg-flora-light
+           relative;
+  }
+
+  .nav-link-active {
+    @apply text-flora-forest font-semibold bg-flora-light;
+  }
+
+  /* Step circle */
+  .step-circle {
+    @apply w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg
+           border-2 border-flora-green text-flora-green bg-flora-green/10;
+  }
+}
+
+@layer utilities {
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-flora-emerald via-flora-green to-[#047857] bg-clip-text text-transparent;
+  }
+
+  .border-flora {
+    @apply border border-emerald-200;
+  }
+
+  .ring-flora {
+    @apply ring-2 ring-flora-green/40;
+  }
+}
+
+/* ===== Custom animations not covered by Tailwind ===== */
+@keyframes scanLine {
+  0% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(200px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.9; }
+}
+
+@keyframes particleFade {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
+}
+
+.particle {
+  animation: particleFade 2.5s ease-in-out infinite;
+}
+.particle:nth-child(2) { animation-delay: 0.5s; }
+.particle:nth-child(3) { animation-delay: 1s; }
+.particle:nth-child(4) { animation-delay: 1.5s; }
+.particle:nth-child(5) { animation-delay: 2s; }
+
+/* Upload zone drag active */
+.upload-active {
+  border-color: #39FF88 !important;
+  background: #f0fdf4 !important;
+}

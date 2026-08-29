@@ -1,0 +1,28 @@
+{
+    "model": "RandomForestClassifier",
+    "task": "Multiclass Fertilizer Recommendation",
+    "target": "Recommended_Fertilizer",
+    "num_classes": 7,
+    "classes": [
+        "Compost",
+        "DAP",
+        "MOP",
+        "NPK",
+        "SSP",
+        "Urea",
+        "Zinc Sulphate"
+    ],
+    "organic_fertilizers": [
+        "Compost"
+    ],
+    "inorganic_fertilizers": [
+        "MOP",
+        "Urea",
+        "Zinc Sulphate",
+        "NPK",
+        "DAP",
+        "SSP"
+    ],
+    "training_samples": 8000,
+    "testing_samples": 2000
+}
