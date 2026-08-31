@@ -1,7 +1,8 @@
-﻿// FloraFarm — Fertilizer AI Page (standalone)
+// FloraFarm — Fertilizer AI Page (standalone)
 import React, { useState } from 'react';
 import { FlaskConical, RefreshCcw } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useChatContext } from '../context/ChatContext';
 import { recommendFertilizer } from '../services/fertilizerApi';
 import type { FertilizerRequest, FertilizerResult } from '../types';
 import FertilizerForm from '../components/FertilizerForm';
@@ -11,6 +12,7 @@ import Footer from '../components/Footer';
 
 const FertilizerAI: React.FC = () => {
   const { t } = useLanguage();
+  const { setFertilizerResult: setChatFertilizerResult, clearChatContext } = useChatContext();
   const [result, setResult] = useState<FertilizerResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -21,6 +23,7 @@ const FertilizerAI: React.FC = () => {
     try {
       const res = await recommendFertilizer(data);
       setResult(res);
+      setChatFertilizerResult(res);  // push to global chat context
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
       setError(t.errors.backendUnavailable);
@@ -32,6 +35,7 @@ const FertilizerAI: React.FC = () => {
   const reset = () => {
     setResult(null);
     setError('');
+    clearChatContext();  // clear chat advisor context when starting fresh
   };
 
   return (

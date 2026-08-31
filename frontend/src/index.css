@@ -4,15 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== FLORA Design System ===== */
+/* ===== FLORA — Professional Agricultural Design System ===== */
 :root {
   --flora-green: #39FF88;
   --flora-emerald: #10B981;
   --flora-deep: #047857;
   --flora-forest: #064E3B;
   --flora-dark: #022C22;
-  --flora-text: #12372A;
-  --flora-bg: #F8FFFB;
+  --flora-text: #1a2e1a;
+  --flora-bg: #FAFDF8;
+  --agri-soil: #5C4033;
+  --agri-wheat: #D4A843;
+  --agri-cream: #FFF8E7;
 }
 
 @layer base {
@@ -28,8 +31,8 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #F8FFFB;
-    color: #12372A;
+    background-color: var(--flora-bg);
+    color: var(--flora-text);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -189,6 +192,13 @@
     @apply bg-gradient-to-r from-flora-emerald via-flora-green to-[#047857] bg-clip-text text-transparent;
   }
 
+  .text-gradient-earth {
+    background: linear-gradient(135deg, #2D5016, #5C4033, #D4A843);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .border-flora {
     @apply border border-emerald-200;
   }
@@ -196,6 +206,134 @@
   .ring-flora {
     @apply ring-2 ring-flora-green/40;
   }
+}
+
+/* ===== 3D Scene Utilities ===== */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* 3D Rotating Hexagonal Crop Cube */
+.crop-cube {
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: cubeRotate 15s ease-in-out infinite;
+}
+
+.crop-cube .face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border: 2px solid rgba(57, 255, 136, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.crop-cube .face-front  { transform: translateZ(100px); background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(57,255,136,0.1)); }
+.crop-cube .face-back   { transform: rotateY(180deg) translateZ(100px); background: linear-gradient(135deg, rgba(92,64,51,0.12), rgba(212,168,67,0.1)); }
+.crop-cube .face-right  { transform: rotateY(90deg) translateZ(100px); background: linear-gradient(135deg, rgba(45,80,22,0.15), rgba(74,124,46,0.1)); }
+.crop-cube .face-left   { transform: rotateY(-90deg) translateZ(100px); background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(196,114,47,0.1)); }
+.crop-cube .face-top    { transform: rotateX(90deg) translateZ(100px); background: linear-gradient(135deg, rgba(135,206,235,0.15), rgba(74,144,217,0.1)); }
+.crop-cube .face-bottom { transform: rotateX(-90deg) translateZ(100px); background: linear-gradient(135deg, rgba(92,64,51,0.18), rgba(62,39,35,0.1)); }
+
+@keyframes cubeRotate {
+  0%   { transform: rotateX(15deg) rotateY(0deg); }
+  25%  { transform: rotateX(-5deg) rotateY(90deg); }
+  50%  { transform: rotateX(10deg) rotateY(180deg); }
+  75%  { transform: rotateX(-5deg) rotateY(270deg); }
+  100% { transform: rotateX(15deg) rotateY(360deg); }
+}
+
+/* 3D tilt card on hover */
+.tilt-card {
+  transition: transform 0.4s ease;
+  transform: perspective(800px) rotateY(0deg) rotateX(0deg);
+}
+
+.tilt-card:hover {
+  transform: perspective(800px) rotateY(-5deg) rotateX(5deg) translateY(-4px);
+  box-shadow: 12px 12px 30px rgba(6,78,59,0.12), -4px -4px 15px rgba(255,255,255,0.8);
+}
+
+/* Soil/ground cross-section effect */
+.ground-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.ground-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(92,64,51,0.03) 30%,
+    rgba(92,64,51,0.08) 60%,
+    rgba(92,64,51,0.12) 100%
+  );
+  pointer-events: none;
+}
+
+/* Orbiting elements */
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(57,255,136,0.2);
+  animation: orbitSpin 20s linear infinite;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Floating grain particles */
+.grain-particle {
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  background: linear-gradient(180deg, #D4A843, #C4722F);
+  border-radius: 50%;
+  opacity: 0;
+  animation: grainFloat 4s ease-in-out infinite;
+}
+
+@keyframes grainFloat {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+  20%  { opacity: 0.7; }
+  80%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-80px) rotate(180deg); }
+}
+
+/* Leaf sway animation */
+.leaf-sway {
+  animation: leafSway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
 }
 
 /* ===== Custom animations not covered by Tailwind ===== */
@@ -223,4 +361,53 @@
 .upload-active {
   border-color: #39FF88 !important;
   background: #f0fdf4 !important;
+}
+
+/* ===== Chat Widget ===== */
+@keyframes chatDotBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%           { transform: translateY(-6px); opacity: 1; }
+}
+
+.chat-dot {
+  animation: chatDotBounce 1.2s ease-in-out infinite;
+}
+
+/* Scrollbar inside chat panel */
+.chat-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #A7F3D0;
+  border-radius: 999px;
+}
+
+/* Markdown content inside bot bubbles */
+.chat-markdown p { margin: 0 0 0.4em; }
+.chat-markdown p:last-child { margin-bottom: 0; }
+.chat-markdown ul, .chat-markdown ol { padding-left: 1.2em; margin: 0.3em 0; }
+.chat-markdown li { margin-bottom: 0.2em; }
+.chat-markdown strong { color: #064E3B; }
+.chat-markdown h1, .chat-markdown h2, .chat-markdown h3 {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: #064E3B;
+  margin: 0.5em 0 0.3em;
+}
+.chat-markdown code {
+  background: #ECFDF5;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+  color: #065F46;
+}
+.chat-markdown blockquote {
+  border-left: 3px solid #39FF88;
+  padding-left: 0.75em;
+  margin: 0.4em 0;
+  color: #12372A;
+  opacity: 0.7;
 }

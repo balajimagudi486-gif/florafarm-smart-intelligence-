@@ -8,7 +8,9 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-flora-forest text-white/80 mt-24" role="contentinfo">
+    <footer className="relative bg-flora-forest text-white/80 mt-24 overflow-hidden" role="contentinfo">
+      {/* Top agricultural color bar */}
+      <div className="h-1.5 w-full bg-gradient-to-r from-agri-soil via-flora-green to-agri-wheat" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}

@@ -17,6 +17,15 @@ venv/
 .venv/
 ENV/
 *.env
+backend/.env
+
+# Heavy ML Models & Weights (> 100MB / Git Push Limit)
+hmodel/
+*.safetensors
+*.bin
+*.h5
+*.pkl
+*.keras
 
 # Cache / Temp
 .cache/

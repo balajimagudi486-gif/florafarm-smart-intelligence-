@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { Scan, Leaf, RefreshCcw, Zap } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useChatContext } from '../context/ChatContext';
 import { predictDisease } from '../services/diseaseApi';
 import { recommendFertilizer } from '../services/fertilizerApi';
 import type { DiseaseResult, FertilizerRequest, FertilizerResult, AnalysisRecord } from '../types';
@@ -113,6 +114,7 @@ function buildFertilizerDefaults(cropName: string): FertilizerRequest {
 
 const CropAI: React.FC = () => {
   const { t } = useLanguage();
+  const { setDiseaseResult: setChatDiseaseResult, setFertilizerResult: setChatFertilizerResult, clearChatContext } = useChatContext();
   const [step, setStep] = useState<Step>('upload');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
@@ -135,6 +137,7 @@ const CropAI: React.FC = () => {
       // Step 1: Disease prediction
       const dResult = await predictDisease(imageFile);
       setDiseaseResult(dResult);
+      setChatDiseaseResult(dResult);  // push to global chat context
 
       // Step 2: Auto fertilizer recommendation using smart crop-based defaults
       let fResult: FertilizerResult | null = null;
@@ -142,6 +145,7 @@ const CropAI: React.FC = () => {
         const defaults = buildFertilizerDefaults(dResult.crop);
         fResult = await recommendFertilizer(defaults);
         setFertilizerResult(fResult);
+        setChatFertilizerResult(fResult);  // push to global chat context
       } catch (fertErr) {
         console.warn('Auto fertilizer recommendation failed:', fertErr);
       }
@@ -192,6 +196,7 @@ const CropAI: React.FC = () => {
     setDiseaseResult(null);
     setFertilizerResult(null);
     setError('');
+    clearChatContext();  // clear chat advisor context when starting fresh
   };
 
   return (
