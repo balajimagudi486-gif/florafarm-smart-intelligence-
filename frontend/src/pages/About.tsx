@@ -1,4 +1,4 @@
-﻿// FloraFarm — About Page
+// FloraFarm — About Page
 import React from 'react';
 import { Scan, FlaskConical, Globe, Leaf, Shield, Brain, Cpu, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';

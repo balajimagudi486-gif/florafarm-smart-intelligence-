@@ -1,4 +1,4 @@
-﻿// FloraFarm — How It Works Page
+// FloraFarm — How It Works Page
 import React from 'react';
 import { Upload, Brain, Eye, Droplets } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';

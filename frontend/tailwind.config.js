@@ -11,6 +11,7 @@ export default {
           green: '#39FF88',
           emerald: '#10B981',
           'deep-emerald': '#047857',
+          deep: '#047857',
           forest: '#064E3B',
           dark: '#022C22',
           light: '#ECFDF5',

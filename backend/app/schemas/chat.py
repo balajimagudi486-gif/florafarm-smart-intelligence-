@@ -20,6 +20,7 @@ class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=4096, description="User's message")
     history: List[ChatHistoryEntry] = Field(default_factory=list, description="Prior conversation turns")
     context: Optional[ChatContext] = None
+    language: Optional[str] = Field(default="en", description="User's preferred language ('en' or 'ta')")
 
 
 class ChatResponse(BaseModel):

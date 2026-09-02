@@ -1,4 +1,4 @@
-﻿// FloraFarm — Home Page
+// FloraFarm — Home Page
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Scan, FlaskConical, Leaf, Zap, ArrowRight, Shield, Brain, Globe, Upload, Eye, Droplets, Cpu, Server, Code2, CheckCircle2 } from 'lucide-react';

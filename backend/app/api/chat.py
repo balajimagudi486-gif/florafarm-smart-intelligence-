@@ -11,9 +11,14 @@ router = APIRouter()
 
 
 @router.post(
-    "/",
+    "",
     response_model=ChatResponse,
     summary="FloraFarm Agri-Advisor — conversational AI endpoint",
+)
+@router.post(
+    "/",
+    response_model=ChatResponse,
+    summary="FloraFarm Agri-Advisor — conversational AI endpoint (with slash)",
 )
 async def chat(request: ChatRequest) -> ChatResponse:
     """
@@ -22,6 +27,7 @@ async def chat(request: ChatRequest) -> ChatResponse:
     - **message**: The user's current question or message.
     - **history**: Prior conversation turns for multi-turn context.
     - **context**: Optional domain context (disease scan result, soil data, fertilizer result).
+    - **language**: 'en' for English or 'ta' for Tamil.
 
     Returns the assistant's reply as a Markdown-formatted string.
     """
@@ -29,7 +35,8 @@ async def chat(request: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 
     logger.info(
-        "Chat request | history_turns=%d | has_context=%s",
+        "Chat request | lang=%s | history_turns=%d | has_context=%s",
+        request.language,
         len(request.history),
         request.context is not None,
     )
@@ -38,5 +45,6 @@ async def chat(request: ChatRequest) -> ChatResponse:
         message=request.message,
         history=request.history,
         context=request.context,
+        language=request.language or "en",
     )
     return response

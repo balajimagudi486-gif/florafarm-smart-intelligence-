@@ -1,4 +1,4 @@
-﻿// FloraFarm — Tamil translations (தமிழ் மொழிபெயர்ப்பு)
+// FloraFarm — Tamil translations (தமிழ் மொழிபெயர்ப்பு)
 import type { Translations } from './en';
 
 const ta: Translations = {

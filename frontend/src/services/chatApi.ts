@@ -22,11 +22,12 @@ export interface ChatResponse {
 export async function sendChatMessage(
   message: string,
   history: ChatHistoryEntry[],
-  context?: ChatContext | null
+  context?: ChatContext | null,
+  language: string = 'en'
 ): Promise<ChatResponse> {
   const response = await axios.post<ChatResponse>(
     `${API_BASE}/api/chat/`,
-    { message, history, context: context ?? null },
+    { message, history, context: context ?? null, language },
     { headers: { 'Content-Type': 'application/json' }, timeout: 180000 }
   );
   return response.data;
